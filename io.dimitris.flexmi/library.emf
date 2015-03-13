@@ -1,0 +1,17 @@
+@namespace(uri="http://dimitris.io/library", prefix="")
+package library;
+
+class Library {
+	val Book[*] books;
+	attr String name;
+}
+
+class Book {
+	attr String name;
+	val Chapter[*] chapters;	
+}
+
+class Chapter{
+	attr String name;
+	attr int pages;
+}
