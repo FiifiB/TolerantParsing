@@ -38,8 +38,27 @@ public class TestClass {
 	}
 	
 	@Test
-	public void testCase1(){
+	public void testCase1() {
 		
+		//Wrong tag names in two nodes
+		try {
+			testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument1.xml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testCase2() {
+		
+		//Wrong tag names and wrong attribute names in two nodes
+		try {
+			testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument2.xml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void testDoc(File EmfModel,File ExpectedXML,File TestDocument) throws IOException{
@@ -74,13 +93,15 @@ public class TestClass {
 		String fixedDoc = xmlout.outputString(new FuzzyCorrection(doc, ePackage).fixDocument());
 		String correctDoc = xmlout.outputString(expectedDoc);
 		
-		if (!fixedDoc.equals(correctDoc)){
-			try {
+		try {
+			if (fixedDoc.equals(correctDoc)){			
+				System.out.println("The corrected XML matches the expected XML");		
+			}else{
 				throw new TestFailedException();
-			} catch (TestFailedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		} catch (TestFailedException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 		}
 	}
 

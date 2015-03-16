@@ -54,9 +54,11 @@ public class LevenshteinDistance {
 		}
 		Collections.sort(Datadist);
 //		System.out.println(Datadist.get(0).getClassName());
-		
-		if(Datadist.get(0).distance != 15000000){
-			bestString = Datadist.get(0).getClassName();
+	
+		if(Datadist.size() != 0 ){
+			if(Datadist.get(0).distance != 15000000){
+				bestString = Datadist.get(0).getClassName();
+			}
 		}
 		
 		return bestString;
