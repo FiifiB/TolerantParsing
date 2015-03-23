@@ -14,5 +14,9 @@ class Book {
 class Chapter{
 	attr String name;
 	attr int pages;
+	val Content[1] content;
+}
+class Content{
+	
 }
 

@@ -35,6 +35,7 @@ public class FuzzyCorrection {
 	public Document fixDocument(){
 		Graph XMLGraph = convertDocToGraph();
 		Graph modelGraph = convertModelToGraph(this.model);
+		//put abstract class here
 		pairwiseGraph = matchGraphs(XMLGraph, modelGraph);
 		if (pairwiseGraph.getNodes().isEmpty()){
 			System.out.println("Could not make a paired graph");
