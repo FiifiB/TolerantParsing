@@ -41,35 +41,35 @@ public class ScoreCalculator {
 
 		Collections.sort(result);
 
-//		ArrayList<Vertex> newResult = new ArrayList<Vertex>();
-//		ArrayList<EClass> copyList = new ArrayList<EClass>();
-//		ArrayList<EClass> eclassList = getAllEClass();
-//		ArrayList<Element> copyList2 = new ArrayList<Element>();
-//		ArrayList<Element> elementList = getAllElements();	
-//		//remove all nodepairs after pairing at least one of every eclass and one of every element in the model
-//		for (Vertex nodePair:result){
-//			if((copyList.size() != eclassList.size()) || (copyList2.size() != elementList.size())){
-//				if(!copyList.contains(nodePair.getVertexEclass())){
-//					copyList.add(nodePair.getVertexEclass());
-//					if(!newResult.contains(nodePair)){
-//						newResult.add(nodePair);
-//					}
-//					
-//				}else if (!newResult.contains(nodePair)) {
-//					newResult.add(nodePair);
-//				}
-//				if(!copyList2.contains(nodePair.getVertexElement())){
-//					copyList2.add(nodePair.getVertexElement());
-//					if(!newResult.contains(nodePair)){
-//						newResult.add(nodePair);
-//					}
-//					
-//				}else if (!newResult.contains(nodePair)) {
-//					newResult.add(nodePair);
-//				}
-//			}		
-//		}		
-		return result;
+		ArrayList<Vertex> newResult = new ArrayList<Vertex>();
+		ArrayList<EClass> copyList = new ArrayList<EClass>();
+		ArrayList<EClass> eclassList = getAllEClass();
+		ArrayList<Element> copyList2 = new ArrayList<Element>();
+		ArrayList<Element> elementList = getAllElements();	
+		//remove all nodepairs after pairing at least one of every eclass and one of every element in the model
+		for (Vertex nodePair:result){
+			if((copyList.size() != eclassList.size()) || (copyList2.size() != elementList.size())){
+				if(!copyList.contains(nodePair.getVertexEclass())){
+					copyList.add(nodePair.getVertexEclass());
+					if(!newResult.contains(nodePair)){
+						newResult.add(nodePair);
+					}
+					
+				}else if (!newResult.contains(nodePair)) {
+					newResult.add(nodePair);
+				}
+				if(!copyList2.contains(nodePair.getVertexElement())){
+					copyList2.add(nodePair.getVertexElement());
+					if(!newResult.contains(nodePair)){
+						newResult.add(nodePair);
+					}
+					
+				}else if (!newResult.contains(nodePair)) {
+					newResult.add(nodePair);
+				}
+			}		
+		}		
+		return newResult;
 	}
 
 	private ArrayList<Element> getAllElements(){
