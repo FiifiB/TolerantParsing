@@ -1,27 +1,45 @@
 package io.dimitris.flexmi.gui;
 
+import graphtools.Graph;
+
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.swing.JPanel;
+
+import org.eclipse.emf.ecore.EPackage;
+import org.jdom2.Document;
 
 public class MainFrameGUI {
 
 	private JFrame frame;
 	private JButton next = new JButton("Next");
 	private JButton previous = new JButton("Previous");
-	private LoadModelGUI loadmodelpanel =  new LoadModelGUI();
-	private LoadXMLGUI loadxmlpanel = new LoadXMLGUI();
-	private GraphTransformGUI graphtransformpanel = new GraphTransformGUI();
-	private ValidateGUI validatingpanel = new ValidateGUI();
+	private LoadModelGUI loadmodelpanel =  new LoadModelGUI(this);
+	private LoadXMLGUI loadxmlpanel = new LoadXMLGUI(this);
+	private GraphTransformGUI graphtransformpanel = new GraphTransformGUI(this);
+	private ValidateGUI validatingpanel = new ValidateGUI(this);
+	private CorrectionGUI correctionpanel = new CorrectionGUI();
+	private OutputGUI outputpanel = new OutputGUI();
 	private JPanel contentPanel ;
 	private CardLayout cardlayout = new CardLayout();
+	public int panel = 1;
+	public EPackage model;
+	public Document xmldocument;
+	public Graph modelGraph;
+	public Graph XMLGraph;
+	public String validationMethod;
+	public Graph validationResult;
+	public String correctionMethod;
 
 	/**
 	 * Launch the application.
@@ -74,6 +92,9 @@ public class MainFrameGUI {
 		contentPanel.add(loadxmlpanel, "loadxml");
 		contentPanel.add(graphtransformpanel, "graphtransform");
 		contentPanel.add(validatingpanel, "validation");
+		contentPanel.add(correctionpanel, "correction");
+		contentPanel.add(outputpanel, "output");
+		
 		
 		cardlayout.show(contentPanel, "loadmodel");
 	}
@@ -85,9 +106,56 @@ public class MainFrameGUI {
 			JButton src = (JButton) event.getSource();
 			
 			if(src.equals(next)){
-				cardlayout.next(contentPanel);;
+				if(panel == 1){
+					try {
+						model = loadmodelpanel.getModel();
+						cardlayout.show(contentPanel, "loadxml");
+						panel =  panel + 1;
+					} catch (Exception e) {
+						StringWriter sw = new StringWriter();
+						e.printStackTrace(new PrintWriter(sw));
+						String exceptionAsString = sw.toString();
+						loadmodelpanel.lblerrorLabel.setText(exceptionAsString);
+						
+					}
+				}
+				if(panel == 2){
+					try {
+						xmldocument = loadxmlpanel.getDocument();
+						cardlayout.show(contentPanel, "graphtransform");
+						panel =  panel + 1;
+					} catch (Exception e) {
+						StringWriter sw = new StringWriter();
+						e.printStackTrace(new PrintWriter(sw));
+						String exceptionAsString = sw.toString();
+						JOptionPane.showConfirmDialog(loadxmlpanel, exceptionAsString);						
+					}
+				}
+				if(panel == 3){
+					validationMethod = graphtransformpanel.getValidationMethodName();
+					if (validationMethod == null || validationMethod == "")
+						JOptionPane.showConfirmDialog(graphtransformpanel, "Please select valid validation", "Error", JOptionPane.OK_OPTION);
+					else{
+						panel =  panel + 1;
+						cardlayout.show(contentPanel, "validation");
+						validationResult = validatingpanel.startValidating(validationMethod);
+					}					
+				}
+				if(panel == 4){
+					correctionMethod = validatingpanel.getCorrectionalMethod();
+					if (correctionMethod == null || correctionMethod == "")
+						JOptionPane.showConfirmDialog(validatingpanel, "Please select valid correction", "Error", JOptionPane.OK_OPTION);
+					else{
+						panel =  panel + 1;
+						cardlayout.show(contentPanel, "correction");
+//						correctionResult = ;
+					}			
+				}
 			}
 			if(src.equals(previous)){
+				if(panel != 1){
+					panel = panel -1;
+				}
 				cardlayout.previous(contentPanel);
 			}
 			

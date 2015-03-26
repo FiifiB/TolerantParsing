@@ -47,8 +47,8 @@ public class FuzzyCorrection {
 		System.out.println(fixpointResult.size());
 		Document repairedDoc = new ErrorCorrector(doc,fixpointResult,modelGraph).start();
 //		Document repairedDoc = new ErrorCorrector2(doc,fixpointResult,CorrectorGraph).start();
-		XMLOutputter xmlout = new XMLOutputter();
-		System.out.println(xmlout.outputString(repairedDoc));
+//		XMLOutputter xmlout = new XMLOutputter();
+//		System.out.println(xmlout.outputString(repairedDoc));
 		return repairedDoc;
 	}
 	
