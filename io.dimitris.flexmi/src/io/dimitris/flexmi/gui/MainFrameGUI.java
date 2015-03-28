@@ -148,7 +148,7 @@ public class MainFrameGUI {
 					else{
 						panel =  panel + 1;
 						cardlayout.show(contentPanel, "correction");
-//						correctionResult = ;
+//						correctionResult = 
 					}			
 				}
 			}
