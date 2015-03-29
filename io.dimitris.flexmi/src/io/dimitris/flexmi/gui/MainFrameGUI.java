@@ -1,6 +1,7 @@
 package io.dimitris.flexmi.gui;
 
 import graphtools.Graph;
+import graphtools.Vertex;
 
 import java.awt.EventQueue;
 
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.LinkedHashMap;
 
 import javax.swing.JPanel;
 
@@ -28,8 +30,8 @@ public class MainFrameGUI {
 	private LoadXMLGUI loadxmlpanel = new LoadXMLGUI(this);
 	private GraphTransformGUI graphtransformpanel = new GraphTransformGUI(this);
 	private ValidateGUI validatingpanel = new ValidateGUI(this);
-	private CorrectionGUI correctionpanel = new CorrectionGUI();
-	private OutputGUI outputpanel = new OutputGUI();
+	private CorrectionGUI correctionpanel = new CorrectionGUI(this);
+	private OutputGUI outputpanel = new OutputGUI(this);
 	private JPanel contentPanel ;
 	private CardLayout cardlayout = new CardLayout();
 	public int panel = 1;
@@ -40,7 +42,8 @@ public class MainFrameGUI {
 	public String validationMethod;
 	public Graph validationResult;
 	public String correctionMethod;
-
+	public LinkedHashMap<Vertex, Double> correctionResult;
+	public String outputMethod;
 	/**
 	 * Launch the application.
 	 */
@@ -151,6 +154,17 @@ public class MainFrameGUI {
 //						correctionResult = 
 					}			
 				}
+				if(panel == 5){
+					outputMethod = correctionpanel.getOutputMethod();
+					if (outputMethod == null || outputMethod == "")
+						JOptionPane.showConfirmDialog(validatingpanel, "Please select valid Output method", "Error", JOptionPane.OK_OPTION);
+					else{
+						panel =  panel + 1;
+						cardlayout.show(contentPanel, "output");
+						outputpanel.startOutput(outputMethod);
+					}			
+				}
+				
 			}
 			if(src.equals(previous)){
 				if(panel != 1){
