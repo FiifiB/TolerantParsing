@@ -67,9 +67,9 @@ public class LoadModelGUI extends JPanel {
 	
 	public EPackage getModel() throws Exception{
 		EPackage model  = null;
-		LoadData load = new LoadData();
 		
-		load.getEpackage(modelFile);
+		
+		model = LoadData.getEpackage(modelFile);
 		return model;
 	}
 	

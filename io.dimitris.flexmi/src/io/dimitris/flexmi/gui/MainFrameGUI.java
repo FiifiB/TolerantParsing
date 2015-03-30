@@ -100,6 +100,8 @@ public class MainFrameGUI {
 		
 		
 		cardlayout.show(contentPanel, "loadmodel");
+		loadmodelpanel.lblerrorLabel.setText(String.valueOf(panel));
+		panel = 1;
 	}
 	
 	public class actionlistner implements ActionListener{
@@ -111,9 +113,10 @@ public class MainFrameGUI {
 			if(src.equals(next)){
 				if(panel == 1){
 					try {
+						System.out.println("executed 1");
 						model = loadmodelpanel.getModel();
 						cardlayout.show(contentPanel, "loadxml");
-						panel =  panel + 1;
+						panel ++;
 					} catch (Exception e) {
 						StringWriter sw = new StringWriter();
 						e.printStackTrace(new PrintWriter(sw));
@@ -122,11 +125,12 @@ public class MainFrameGUI {
 						
 					}
 				}
-				if(panel == 2){
+				else if(panel == 2){
 					try {
+						System.out.println("executed 2");
 						xmldocument = loadxmlpanel.getDocument();
 						cardlayout.show(contentPanel, "graphtransform");
-						panel =  panel + 1;
+						panel ++;
 					} catch (Exception e) {
 						StringWriter sw = new StringWriter();
 						e.printStackTrace(new PrintWriter(sw));
@@ -134,27 +138,28 @@ public class MainFrameGUI {
 						JOptionPane.showConfirmDialog(loadxmlpanel, exceptionAsString);						
 					}
 				}
-				if(panel == 3){
+				else if(panel == 3){
+					graphtransformpanel.transformFiles();
 					validationMethod = graphtransformpanel.getValidationMethodName();
 					if (validationMethod == null || validationMethod == "")
 						JOptionPane.showConfirmDialog(graphtransformpanel, "Please select valid validation", "Error", JOptionPane.OK_OPTION);
 					else{
-						panel =  panel + 1;
+						panel++;
 						cardlayout.show(contentPanel, "validation");
 						validationResult = validatingpanel.startValidating(validationMethod);
 					}					
 				}
-				if(panel == 4){
+				else if(panel == 4){
 					correctionMethod = validatingpanel.getCorrectionalMethod();
 					if (correctionMethod == null || correctionMethod == "")
 						JOptionPane.showConfirmDialog(validatingpanel, "Please select valid correction", "Error", JOptionPane.OK_OPTION);
 					else{
 						panel =  panel + 1;
 						cardlayout.show(contentPanel, "correction");
-//						correctionResult = 
+						correctionResult = correctionpanel.startCorrecting(correctionMethod);
 					}			
 				}
-				if(panel == 5){
+				else if(panel == 5){
 					outputMethod = correctionpanel.getOutputMethod();
 					if (outputMethod == null || outputMethod == "")
 						JOptionPane.showConfirmDialog(validatingpanel, "Please select valid Output method", "Error", JOptionPane.OK_OPTION);
@@ -167,10 +172,10 @@ public class MainFrameGUI {
 				
 			}
 			if(src.equals(previous)){
-				if(panel != 1){
-					panel = panel -1;
+				if(panel > 1){
+					panel = panel - 1;
+					cardlayout.previous(contentPanel);
 				}
-				cardlayout.previous(contentPanel);
 			}
 			
 		}

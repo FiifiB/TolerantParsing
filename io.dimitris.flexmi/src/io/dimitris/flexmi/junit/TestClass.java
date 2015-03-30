@@ -26,16 +26,16 @@ public class TestClass {
 	public TestClass(){
 		
 	}
-	public static void main(String[] args) {
-		EcoreGenerator gen = new EcoreGenerator();
-		try {
-			gen.generate(new File("ABC.emf"), true);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+//	public static void main(String[] args) {
+//		EcoreGenerator gen = new EcoreGenerator();
+//		try {
+//			gen.generate(new File("ABC.emf"), true);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	
 	@Test
 	public void testCase1() {
@@ -92,6 +92,7 @@ public class TestClass {
 		XMLOutputter xmlout = new XMLOutputter(Format.getCompactFormat());
 		String fixedDoc = xmlout.outputString(new FuzzyCorrection(doc, ePackage).fixDocument());
 		String correctDoc = xmlout.outputString(expectedDoc);
+		System.out.println(fixedDoc);
 		
 		try {
 			if (fixedDoc.equals(correctDoc)){			

@@ -106,14 +106,18 @@ public class ScoreCalculator {
 		LevenshteinDistance attDistance = new LevenshteinDistance(classAttstoStringArray(eclass));
 		double attSum = 0;
 		int numberOfatts = eclass.getEAllAttributes().size();
-		if(numberOfatts != 0 || element.getAttributes().size() != 0){
+		if(numberOfatts != 0 && element.getAttributes().size() != 0 && eclass.getEAllAttributes() != null){
 			//get all the distance of each attributes with the best match in the model and the divide the sum by how many attributes in the model class
+			
 			for(Attribute att: element.getAttributes()){
 				attSum = attSum + LevenshteinDistance.distance(att.getName(), attDistance.bestMatch(att.getName()));
 			}
-			System.out.println("sum dist: " + attSum);
+//			System.out.println("sum dist: " + attSum);
 			attSum = attSum / numberOfatts;
 			sum = sum + attSum;
+		}else if(eclass.getEAllAttributes() == null){
+			System.out.println("null eclass so adds to sum");
+			sum = sum + element.getAttributes().size();
 		}
 		
 		int numberOfChildrenXML = DocGraph.getNode(element).getConnectedEdges().size();

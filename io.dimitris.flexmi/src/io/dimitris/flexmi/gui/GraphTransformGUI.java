@@ -8,12 +8,14 @@ import javax.swing.JComboBox;
 
 public class GraphTransformGUI extends JPanel {
 	private JComboBox comboBox ;
+	private MainFrameGUI parent;
 
 	/**
 	 * Create the panel.
 	 */
 	public GraphTransformGUI(MainFrameGUI parent) {
 		setLayout(null);
+		this.parent = parent;
 		
 		JLabel lblChooseValidation = new JLabel("Please Choose Validation Process");
 		lblChooseValidation.setBounds(12, 12, 281, 30);
@@ -28,12 +30,16 @@ public class GraphTransformGUI extends JPanel {
 		lblClickNextTo.setBounds(12, 425, 598, 15);
 		add(lblClickNextTo);
 		
-		parent.modelGraph = GraphTransform.convertModelToGraph(parent.model);
-		parent.XMLGraph = GraphTransform.convertDocToGraph(parent.xmldocument);
+		
 
 	}
 	
 	public String getValidationMethodName(){
 		return (String)comboBox.getSelectedItem();
+	}
+	
+	public void transformFiles(){
+		parent.modelGraph = GraphTransform.convertModelToGraph(parent.model);
+		parent.XMLGraph = GraphTransform.convertDocToGraph(parent.xmldocument);
 	}
 }

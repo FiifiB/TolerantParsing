@@ -22,6 +22,7 @@ public class ErrorCorrector {
 	public ErrorCorrector(Document XMLDocument, LinkedHashMap<Vertex, Double> bestMatchings, Graph modelGraph){
 		this.doc = XMLDocument;
 		this.bestMatchings = bestMatchings;
+		System.out.println("results size: " +bestMatchings.size());
 		this.model = modelGraph;
 		
 	}

@@ -40,10 +40,12 @@ public class CorrectionGUI extends JPanel {
 		add(lblChooseOutputMethod);
 		
 		JRadioButton rdbtnPrintOutCorrections = new JRadioButton("Print out corrections");
+		rdbtnPrintOutCorrections.setActionCommand("Print out corrections");
 		rdbtnPrintOutCorrections.setBounds(12, 239, 215, 23);
 		add(rdbtnPrintOutCorrections);
 		
 		JRadioButton rdbtnAutomaticallyCorrectXml = new JRadioButton("Automatically correct XML document");
+		rdbtnAutomaticallyCorrectXml.setActionCommand("Automatically correct XML document");
 		rdbtnAutomaticallyCorrectXml.setBounds(293, 239, 305, 23);
 		add(rdbtnAutomaticallyCorrectXml);
 		
@@ -59,25 +61,18 @@ public class CorrectionGUI extends JPanel {
 	}
 	
 	public String getOutputMethod(){
-		JRadioButton radiobutton = (JRadioButton)group.getSelection();
-		return radiobutton.getText();
+		return group.getSelection().getActionCommand();
 	}
 	
-	public String startCorrecting(String correctionMethod){
+	public LinkedHashMap<Vertex, Double> startCorrecting(String correctionMethod){
 		if (correctionMethod == "Simularity Flooding"){
 			FloodingCorrection flooding = new FloodingCorrection(parent.xmldocument);
 			Graph propagatedGraph = flooding.propagateGraph(parent.validationResult);
 			LinkedHashMap<Vertex, Double> fixpointResult = flooding.runFixpointComputation(propagatedGraph);
-			try {
-				correctedFile("Test", parent.xmldocument, fixpointResult, parent.modelGraph);
-			} catch (IOException e) {
-				JOptionPane.showConfirmDialog(this, "Already corrected the xml File/Some other error","Error Correcting",JOptionPane.OK_OPTION);
-				e.printStackTrace();
-				return "Correction made";
-			}
-			return System.getProperty("user.dir") + "Test" + "_corrected";
+			
+			return fixpointResult;
 		}
-		return "Corrections have been made";
+		return null;
 	}
 	
 	private void correctedFile (String filename,Document doc, LinkedHashMap<Vertex, Double> fixpointResult,Graph modelGraph) throws IOException{
