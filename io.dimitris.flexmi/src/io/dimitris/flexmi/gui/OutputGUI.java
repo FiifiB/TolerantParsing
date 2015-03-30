@@ -3,6 +3,7 @@ package io.dimitris.flexmi.gui;
 import graphtools.Graph;
 import graphtools.Vertex;
 import io.dimitris.flexmi.ErrorCorrector;
+import io.dimitris.flexmi.ErrorReporter;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -53,17 +54,20 @@ public class OutputGUI extends JPanel {
 		lblOutputStatus.setText("...Processing Output...");
 		if(outputMethod == "Automatically correct XML document"){
 			try {
-				correctedFile("Test", parent.xmldocument, parent.correctionResult, parent.modelGraph);
+				correctFile("Test", parent.xmldocument, parent.correctionResult, parent.modelGraph);
 				lblLocationFile.setText("Please find the newly corrected XML document in \n" + System.getProperty("user.dir") + "Test" + "_corrected.xml");
 			} catch (IOException e) {
 				JOptionPane.showConfirmDialog(this, "Already corrected the xml File/Some other error","Error Correcting",JOptionPane.OK_OPTION);
 				e.printStackTrace();
 			}
-		}	
+		}else if(outputMethod == "Print out corrections"){
+			printCorrections(parent.xmldocument, parent.correctionResult);
+		}
+	
 		
 	}
 	
-	private void correctedFile (String filename,Document doc, LinkedHashMap<Vertex, Double> fixpointResult,Graph modelGraph) throws IOException{
+	private void correctFile (String filename,Document doc, LinkedHashMap<Vertex, Double> fixpointResult,Graph modelGraph) throws IOException{
 		Document result = new ErrorCorrector(doc, fixpointResult, modelGraph).start();
 		
 		XMLOutputter outputter =  new XMLOutputter(Format.getCompactFormat());
@@ -73,5 +77,9 @@ public class OutputGUI extends JPanel {
 		writer.close();
 		
 		
+	}
+	
+	private void printCorrections(Document XMLDocument, LinkedHashMap<Vertex, Double> bestMatchings){
+		ErrorReporter reporter = new ErrorReporter(XMLDocument, bestMatchings);
 	}
 }
