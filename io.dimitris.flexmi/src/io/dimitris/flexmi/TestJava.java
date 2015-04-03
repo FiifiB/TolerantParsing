@@ -23,8 +23,8 @@ public class TestJava {
 		Element root = new Element("A");
 		Element child1 = new Element("B");
 		Element child2 = new Element("C");
-		Element child1_1 = new Element("D");
-		child1.addContent(child1_1);
+//		Element child1_1 = new Element("D");
+//		child1.addContent(child1_1);
 		root.addContent(child1);
 		root.addContent(child2);
 		Document doc = new Document(root);

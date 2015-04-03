@@ -2,6 +2,7 @@ package io.dimitris.flexmi.gui;
 
 import graphtools.Graph;
 import io.dimitris.flexmi.PairwiseValidation;
+import io.dimitris.flexmi.Validation;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -41,15 +42,15 @@ public class ValidateGUI extends JPanel {
 	}
 	public Graph startValidating(String ValidationName){
 		if(ValidationName == "Pairwise Validation"){
-			PairwiseValidation pvalidation = new PairwiseValidation(parent.XMLGraph, parent.modelGraph, parent.xmldocument, parent.model);
-			Graph validationResult = pvalidation.getResult();
+			Validation pvalidation = new PairwiseValidation(parent.XMLGraph, parent.modelGraph, parent.xmldocument, parent.model);
+			boolean validationResult = pvalidation.getValidationResult();
 			
-			if (validationResult == null){
+			if (validationResult == true){
 				lblValidatingStatus.setText("Validating Succes. No errors found");
 				return null;
 			}
 			
-			return validationResult;			
+			return (Graph)pvalidation.getValidationErrors();			
 		}
 		return null;
 	}

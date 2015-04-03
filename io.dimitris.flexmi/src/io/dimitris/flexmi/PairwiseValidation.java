@@ -1,20 +1,20 @@
 package io.dimitris.flexmi;
 
-import java.math.MathContext;
+import graphtools.Edge;
+import graphtools.Graph;
+import graphtools.Vertex;
+
 import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.jdom2.Document;
-
-import graphtools.Edge;
-import graphtools.Graph;
-import graphtools.Vertex;
 
 public class PairwiseValidation extends Validation{
 	private Graph XMLGraph;
 	private Graph modelGraph;
 	private Document xmldoc;
 	private EPackage ecoremodel;
+	private Graph validationErrors;
 
 	public PairwiseValidation(Graph XMLGraph,Graph modelGraph,Document doc, EPackage model) {
 		super(XMLGraph,modelGraph);
@@ -26,19 +26,27 @@ public class PairwiseValidation extends Validation{
 	}
 
 	@Override
-	public Graph getResult() {
-		Graph result = matchGraphs(XMLGraph, modelGraph,xmldoc,ecoremodel);
+	public boolean getValidationResult() {
+		boolean result = false;
+		validationErrors = matchGraphs(XMLGraph, modelGraph,xmldoc,ecoremodel);
 		//TODO check graph to see if validation produces errors
-		boolean pairsmatched = doPairsmatch(result);
-		boolean equalNoOfnodes = noOfNodes(result, XMLGraph);
+		boolean pairsmatched = doPairsmatch(validationErrors);
+		boolean equalNoOfnodes = noOfNodes(validationErrors, XMLGraph);
 		
 		if(pairsmatched && equalNoOfnodes)
-			return null;
+			return true;
 		
 		return result;
 	}
 	
-	public Graph matchGraphs(Graph DocGraph, Graph ModelGraph,Document doc, EPackage model){
+	@Override
+	public Object getValidationErrors() {
+		return validationErrors;
+	}
+	
+	
+	
+	private Graph matchGraphs(Graph DocGraph, Graph ModelGraph,Document doc, EPackage model){
 		
 		Graph pairedGraph = new Graph();
 		ScoreCalculator myPairsCreater = new ScoreCalculator(doc, model,DocGraph,ModelGraph);
@@ -130,6 +138,11 @@ public class PairwiseValidation extends Validation{
 			return true;
 		else
 			return false;
+	}
+	
+	private boolean relationshipPreservation(){
+		//TODO write method
+		return false;
 	}
 	
 

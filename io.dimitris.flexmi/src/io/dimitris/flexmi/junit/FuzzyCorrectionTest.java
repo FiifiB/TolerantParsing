@@ -42,9 +42,9 @@ public class FuzzyCorrectionTest {
 		
 		FuzzyCorrection testObj =  new FuzzyCorrection(doc, ePackage);
 		
-		Vertex A = new Vertex("A", new ArrayList<Attribute>());
-		Vertex B = new Vertex("B", new ArrayList<Attribute>());
-		Vertex D = new Vertex("D", new ArrayList<Attribute>());
+		Vertex A = new Vertex("A", new ArrayList<Attribute>(),"");
+		Vertex B = new Vertex("B", new ArrayList<Attribute>(),"");
+		Vertex D = new Vertex("D", new ArrayList<Attribute>(),"");
 		Edge A_B = new Edge(A, B);
 		Edge B_D = new Edge(B, D);
 		A.addConnectedEdge(A_B);
@@ -84,10 +84,10 @@ public class FuzzyCorrectionTest {
 		
 		FuzzyCorrection testObj =  new FuzzyCorrection(doc, ePackage);
 		
-		Vertex A = new Vertex("A", new ArrayList<Attribute>());
-		Vertex B = new Vertex("B", new ArrayList<Attribute>());
-		Vertex C = new Vertex("C", new ArrayList<Attribute>());
-		Vertex D = new Vertex("D", new ArrayList<Attribute>());
+		Vertex A = new Vertex("A", new ArrayList<Attribute>(),"");
+		Vertex B = new Vertex("B", new ArrayList<Attribute>(),"");
+		Vertex C = new Vertex("C", new ArrayList<Attribute>(),"");
+		Vertex D = new Vertex("D", new ArrayList<Attribute>(),"");
 		Edge A_B = new Edge(A, B);
 		Edge A_C = new Edge(A, C);
 		Edge B_D = new Edge(B, D);
@@ -134,22 +134,22 @@ public class FuzzyCorrectionTest {
 		
 		FuzzyCorrection testObj =  new FuzzyCorrection(doc, ePackage);
 		
-		Vertex A_A = new Vertex("A_A", new ArrayList<Attribute>());
-		Vertex A_B = new Vertex("A_B", new ArrayList<Attribute>());
+		Vertex A_A = new Vertex("A_A", new ArrayList<Attribute>(),"");
+		Vertex A_B = new Vertex("A_B", new ArrayList<Attribute>(),"");
 //		Vertex A_C = new Vertex("A_C", new ArrayList<Attribute>());
 //		Vertex A_D = new Vertex("A_D", new ArrayList<Attribute>());
 		
 		
 //		Vertex B_A = new Vertex("B_A", new ArrayList<Attribute>());
-		Vertex B_B = new Vertex("B_B", new ArrayList<Attribute>());
+		Vertex B_B = new Vertex("B_B", new ArrayList<Attribute>(),"");
 //		Vertex B_C = new Vertex("B_C", new ArrayList<Attribute>());
 //		Vertex B_D = new Vertex("B_D", new ArrayList<Attribute>());
 		
 		
 //		Vertex C_A = new Vertex("C_A", new ArrayList<Attribute>());
 //		Vertex C_B = new Vertex("C_B", new ArrayList<Attribute>());
-		Vertex C_C = new Vertex("C_C", new ArrayList<Attribute>());
-		Vertex C_D = new Vertex("C_D", new ArrayList<Attribute>());
+		Vertex C_C = new Vertex("C_C", new ArrayList<Attribute>(),"");
+		Vertex C_D = new Vertex("C_D", new ArrayList<Attribute>(),"");
 		
 //		Vertex D_A = new Vertex("D_A", new ArrayList<Attribute>());
 //		Vertex D_B = new Vertex("D_B", new ArrayList<Attribute>());

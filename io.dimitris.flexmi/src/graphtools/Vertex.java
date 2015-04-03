@@ -2,6 +2,7 @@ package graphtools;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -9,26 +10,31 @@ import org.jdom2.Attribute;
 import org.jdom2.Element;
 
 public class Vertex implements Comparable<Vertex> {
+	private int ID;
 	private String Name;
 	private ArrayList<Attribute> Attributes;
+	private String Content;
 	private Element vertexElement;
 	private EClass vertexEClass;
 	private Double DistanceScore;
 	private ArrayList<Edge> connectedEdges; // these are all outgoing edges
 	
-	public Vertex(String name, ArrayList<Attribute> Attributes){
+	public Vertex(String name, ArrayList<Attribute> Attributes, String Content){
 		this.Name = name;
 		this.Attributes = Attributes;
+		this.Content = Content;
 		connectedEdges = new ArrayList<Edge>();
 		this.vertexElement = null;
 		this.vertexEClass = null;
 	}
 	
 	public Vertex(Element element){
+		this.ID = new Random().nextInt(10000000);
 		this.Name = element.getName();
 		this.Attributes = convertToArrayList(element.getAttributes());
 		connectedEdges = new ArrayList<Edge>();
 		this.vertexElement = element;
+		this.Content = element.getText();
 	}
 	
 	public Vertex(EClass eclass){
@@ -56,6 +62,10 @@ public class Vertex implements Comparable<Vertex> {
 	}
 	
 	public boolean equals(Object o){
+		if(((Vertex)o).getAttributes() != null && this.Attributes != null){
+			return (((Vertex)o).getName().equals(this.Name) &&
+					((Vertex)o).getAttributes().size() == this.Attributes.size());
+		}
 		return (((Vertex)o).getName().equals(this.Name));
 	}
 	
@@ -83,6 +93,10 @@ public class Vertex implements Comparable<Vertex> {
 
 	public ArrayList<Attribute> getAttributes() {
 		return Attributes;
+	}
+	
+	public String getContent(){
+		return Content;
 	}
 
 	public Element getVertexElement() {

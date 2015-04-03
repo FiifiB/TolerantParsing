@@ -106,6 +106,7 @@ public class ScoreCalculator {
 		LevenshteinDistance attDistance = new LevenshteinDistance(classAttstoStringArray(eclass));
 		double attSum = 0;
 		int numberOfatts = eclass.getEAllAttributes().size();
+		int numberOfattsElements = element.getAttributes().size();
 		if(numberOfatts != 0 && element.getAttributes().size() != 0 && eclass.getEAllAttributes() != null){
 			//get all the distance of each attributes with the best match in the model and the divide the sum by how many attributes in the model class
 			
@@ -124,7 +125,8 @@ public class ScoreCalculator {
 		int numberOfChildrenModel = ModelGraph.getNode(eclass).getConnectedEdges().size();
 		//get difference between number of children in graph and model
 		int absdifference = Math.abs(numberOfChildrenXML - numberOfChildrenModel);
-		sum = sum + absdifference;
+		int absdifferenceofatts = Math.abs(numberOfattsElements - numberOfatts);
+		sum = sum + absdifference + absdifferenceofatts;
 		return sum;
 	}
 	

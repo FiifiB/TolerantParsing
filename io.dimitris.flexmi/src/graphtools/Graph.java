@@ -1,5 +1,8 @@
 package graphtools;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -111,5 +114,24 @@ public class Graph {
 		
 		return sameedges && samenodes;
 	}
-
+	
+	public File converToGraphviz(String filename) throws IOException{
+		File file = new File(filename + ".dot");
+		FileWriter writer = new FileWriter(file);
+		String graphviz = "digraph { \n";
+		
+		for(Edge edge : this.Edges){
+			String line = "	" + edge.getSource().getName() + " -> " + edge.getTarget().getName() + "\n";
+			graphviz = graphviz + line ; 
+		}
+		
+		graphviz = graphviz + "}" ;
+		
+		writer.write(graphviz);
+		writer.flush();
+		writer.close();
+		
+		
+		return file;
+	}
 }

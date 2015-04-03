@@ -44,6 +44,7 @@ public class MainFrameGUI {
 	public String correctionMethod;
 	public LinkedHashMap<Vertex, Double> correctionResult;
 	public String outputMethod;
+	
 	/**
 	 * Launch the application.
 	 */

@@ -235,6 +235,7 @@ public class FuzzyCorrection {
 			}
 		}
 		
+		System.out.println("matched graph");
 		for (Edge edge : pairedGraph.getEdges()) {
 			System.out.println("Source: " + edge.getSource().getName() + "----------->" + "Target: "+ edge.getTarget().getName()+"--Edge Val: " + edge.getValue());
 		}
