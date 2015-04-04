@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.core.internal.resources.mapping.ProposedResourceDelta;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -245,20 +246,28 @@ public class FuzzyCorrection {
 	}
 	
 	public Graph propagateGraph(Graph pairedNodesGraph){
+		Graph propagateGraph =  new Graph();
+		
 		for(Vertex parentNode: pairedNodesGraph.getNodes()){
-			
 			//check to see if it is a target node to some edge. if it is then it creates an edge back to its source
 			ArrayList<Edge> edgesItBelongsTo = pairedNodesGraph.isATargetNode(parentNode);
-			if (!edgesItBelongsTo.isEmpty()){
+			if(!edgesItBelongsTo.isEmpty()){
 				for (Edge edge : edgesItBelongsTo){
+					propagateGraph.addEdge(edge);
 					Edge newEdge = new Edge(parentNode, edge.getSource());
 					parentNode.addConnectedEdge(newEdge);
-					pairedNodesGraph.addEdge(newEdge);
+					propagateGraph.addEdge(newEdge);
+					if(!propagateGraph.containsNode(edge.getSource())){
+						propagateGraph.addNode(edge.getSource());
+					}
 				}
 			}
-
+			if(!propagateGraph.containsNode(parentNode)){
+				propagateGraph.addNode(parentNode);
+			}
 		}
-		for(Vertex parentNode: pairedNodesGraph.getNodes()){
+		
+		for(Vertex parentNode: propagateGraph.getNodes()){
 			if(parentNode.getNeighbours().size() != 0){
 				int numberOfChildren = parentNode.getNeighbours().size();
 				double myValue = 1.0 / ((double)numberOfChildren);
@@ -271,10 +280,38 @@ public class FuzzyCorrection {
 			
 		}
 		
-		for(Edge edge: pairedNodesGraph.getEdges()){
+//		for(Vertex parentNode: pairedNodesGraph.getNodes()){
+//			
+//			//check to see if it is a target node to some edge. if it is then it creates an edge back to its source
+//			ArrayList<Edge> edgesItBelongsTo = pairedNodesGraph.isATargetNode(parentNode);
+//			if (!edgesItBelongsTo.isEmpty()){
+//				for (Edge edge : edgesItBelongsTo){
+//					Edge newEdge = new Edge(parentNode, edge.getSource());
+//					parentNode.addConnectedEdge(newEdge);
+//					pairedNodesGraph.addEdge(newEdge);
+//				}
+//			}
+//
+//		}
+//		for(Vertex parentNode: pairedNodesGraph.getNodes()){
+//			if(parentNode.getNeighbours().size() != 0){
+//				int numberOfChildren = parentNode.getNeighbours().size();
+//				double myValue = 1.0 / ((double)numberOfChildren);
+//				for(Edge connectedEdge: parentNode.getConnectedEdges()){
+//					if (connectedEdge.getValue()== null){
+//						connectedEdge.setValue(myValue);
+//					}				
+//				}
+//			}			
+//			
+//		}
+		
+		
+		
+		for(Edge edge: propagateGraph.getEdges()){
 			System.out.println("Source: " + edge.getSource().getName() + "----------->" + "Target: "+ edge.getTarget().getName()+"--Edge Val: " + edge.getValue());
 		}
-		return pairedNodesGraph;
+		return propagateGraph;
 	}
 	
 	public LinkedHashMap<Vertex, Double> runFixpointComputation(Graph propagatedGraph){

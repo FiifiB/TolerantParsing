@@ -22,7 +22,6 @@ public class ErrorCorrector {
 	public ErrorCorrector(Document XMLDocument, LinkedHashMap<Vertex, Double> bestMatchings, Graph modelGraph){
 		this.doc = XMLDocument;
 		this.bestMatchings = bestMatchings;
-		System.out.println("results size: " +bestMatchings.size());
 		this.model = modelGraph;
 		
 	}
@@ -31,7 +30,7 @@ public class ErrorCorrector {
 		return fixRootElement(doc.getRootElement());
 	}
 	
-	public void repairChildren(Element parent, EClass parentClass, Element child){
+	private void repairChildren(Element parent, EClass parentClass, Element child){
 		for(Entry<Vertex, Double> entry : bestMatchings.entrySet()){
 			if(entry.getKey().pairContainsNode(child)){
 				Vertex parentVertex =  new Vertex(parentClass);
@@ -42,6 +41,10 @@ public class ErrorCorrector {
 					for(EAttribute atts: entry.getKey().getVertexEclass().getEAttributes()){
 						newChild.setAttribute(atts.getName(), child.getAttributeValue(bestAttribute(child.getAttributes(), atts).getName()));
 					}
+					
+					// Add element content to corrected element from error element.
+					 newChild.setText(child.getText());
+					
 					parent.addContent(newChild);
 					if(!child.getChildren().isEmpty()){
 						for(Element children: child.getChildren()){
@@ -54,7 +57,7 @@ public class ErrorCorrector {
 		}
 	}
 	
-	public Document fixRootElement(Element root){
+	private Document fixRootElement(Element root){
 		Element newRoot = null;
 		EClass newRootEclass = null;
 		for(Entry<Vertex, Double> entry : bestMatchings.entrySet()){
@@ -67,6 +70,10 @@ public class ErrorCorrector {
 				for(EAttribute atts: entry.getKey().getVertexEclass().getEAttributes()){
 					newRoot.setAttribute(atts.getName(), root.getAttributeValue(bestAttribute(root.getAttributes(), atts).getName()));
 				}
+				
+				// Add element content to corrected element from error element.
+				 newRoot.setText(root.getText());
+				
 				if(!root.getChildren().isEmpty()){
 					for(Element children: root.getChildren()){
 						repairChildren(newRoot,newRootEclass,children);

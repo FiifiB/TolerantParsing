@@ -21,7 +21,7 @@ public class TestJava {
 		EPackage ePackage = (EPackage) metamodelResource.getContents().get(0);
 		
 		Element root = new Element("A");
-		Element child1 = new Element("B");
+		Element child1 = new Element("G");
 		Element child2 = new Element("C");
 //		Element child1_1 = new Element("D");
 //		child1.addContent(child1_1);
