@@ -25,12 +25,11 @@ public class FloodingCorrection extends Correction {
 	
 	@Override
 	public Object getCorrectionResult(Object parameter) {
-		LinkedHashMap<Vertex, Double> fixpointResult = null;
 		Graph propagatedGraph = propagateGraph((Graph)parameter);
-		return null;
+		return runFixpointComputation(propagatedGraph);
 	}
 	
-	public Graph propagateGraph(Graph pairedNodesGraph){
+	private Graph propagateGraph(Graph pairedNodesGraph){
 		Graph propagateGraph =  new Graph();
 		
 		for(Vertex parentNode: pairedNodesGraph.getNodes()){
@@ -72,7 +71,7 @@ public class FloodingCorrection extends Correction {
 		return propagateGraph;
 	}
 	
-	public LinkedHashMap<Vertex, Double> runFixpointComputation(Graph propagatedGraph){
+	private LinkedHashMap<Vertex, Double> runFixpointComputation(Graph propagatedGraph){
 		LinkedHashMap<Vertex, Double> initialValueTable = new LinkedHashMap<Vertex, Double>();
 		for (Vertex eachNode: propagatedGraph.getNodes()){
 			initialValueTable.put(eachNode, 1.0);

@@ -261,10 +261,11 @@ public class FuzzyCorrection {
 						propagateGraph.addNode(edge.getSource());
 					}
 				}
+				if(!propagateGraph.containsNode(parentNode)){
+					propagateGraph.addNode(parentNode);
+				}
 			}
-			if(!propagateGraph.containsNode(parentNode)){
-				propagateGraph.addNode(parentNode);
-			}
+			
 		}
 		
 		for(Vertex parentNode: propagateGraph.getNodes()){

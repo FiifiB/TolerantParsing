@@ -2,6 +2,7 @@ package io.dimitris.flexmi.gui;
 
 import graphtools.Graph;
 import graphtools.Vertex;
+import io.dimitris.flexmi.Correction;
 import io.dimitris.flexmi.ErrorCorrector;
 import io.dimitris.flexmi.FloodingCorrection;
 
@@ -66,9 +67,8 @@ public class CorrectionGUI extends JPanel {
 	
 	public LinkedHashMap<Vertex, Double> startCorrecting(String correctionMethod){
 		if (correctionMethod == "Simularity Flooding"){
-			FloodingCorrection flooding = new FloodingCorrection(parent.xmldocument);
-			Graph propagatedGraph = flooding.propagateGraph(parent.validationResult);
-			LinkedHashMap<Vertex, Double> fixpointResult = flooding.runFixpointComputation(propagatedGraph);
+			Correction flooding = new FloodingCorrection(parent.xmldocument);
+			LinkedHashMap<Vertex, Double> fixpointResult = (LinkedHashMap<Vertex, Double>)flooding.getCorrectionResult(parent.validationResult);
 			
 			return fixpointResult;
 		}
