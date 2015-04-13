@@ -24,18 +24,17 @@ public class LoadData {
 	public static EPackage getEpackage(File EmfModel) throws Exception {
 		EPackage modelpackage = null;
 		EcoreGenerator gen = new EcoreGenerator();
-		gen.generate(EmfModel, true);
-		
+		gen.generate(EmfModel, true);		
 		
 		String modelname = FilenameUtils.removeExtension(EmfModel.getName());
 		
 		ResourceSet metamodelResourceSet = new ResourceSetImpl();
-		metamodelResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
-		Resource metamodelResource = metamodelResourceSet.createResource(URI.createFileURI(modelname+".ecore"));
+		metamodelResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+		.put("ecore", new XMIResourceFactoryImpl());
+		Resource metamodelResource = metamodelResourceSet
+				.createResource(URI.createFileURI(modelname+".ecore"));
 		
-		metamodelResource.load(null);
-		
-		
+		metamodelResource.load(null);		
 		modelpackage = (EPackage) metamodelResource.getContents().get(0);
 		
 		return modelpackage;
