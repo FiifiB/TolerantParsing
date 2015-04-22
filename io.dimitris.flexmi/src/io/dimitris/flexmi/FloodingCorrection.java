@@ -18,6 +18,7 @@ import org.jdom2.Element;
 
 public class FloodingCorrection extends Correction {
 	private Document doc;
+	private int floodingIterations = 0;
 
 	public FloodingCorrection(Document XmlDocument) {
 		this.doc = XmlDocument;
@@ -106,6 +107,7 @@ public class FloodingCorrection extends Correction {
 	
 	private LinkedHashMap<Vertex, Double> iterateComputation(Graph propagatedGraph,LinkedHashMap<Vertex, Double> fixpointValueTable ){
 		LinkedHashMap<Vertex, Double> nthIterationTable = new LinkedHashMap<Vertex, Double>();
+		floodingIterations ++;
 		double biggestVal = 0.0;
 		for (Vertex eachNode: propagatedGraph.getNodes()){
 			double neighoursValues = 0;
@@ -141,6 +143,10 @@ public class FloodingCorrection extends Correction {
 			System.out.println("Node: " + entry.getKey().getName() + "-------->"+ "Value: "+entry.getValue());
 			
 		}
+		if(floodingIterations > 500){
+			return nthIterationTable;
+		}
+		
 		if(numberLessThanEpsilon < (0.7 * nthIterationTable.size())){
 			iterateComputation(propagatedGraph, nthIterationTable);			
 		}

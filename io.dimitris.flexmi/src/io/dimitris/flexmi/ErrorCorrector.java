@@ -27,7 +27,7 @@ public class ErrorCorrector {
 	}
 	
 	public Document start(){
-		return fixRootElement(doc.getRootElement());
+		return fixRootDocument(doc.getRootElement());
 	}
 	
 	private void repairChildren(Element parent, EClass parentClass, Element child){
@@ -57,7 +57,7 @@ public class ErrorCorrector {
 		}
 	}
 	
-	private Document fixRootElement(Element root){
+	private Document fixRootDocument(Element root){
 		Element newRoot = null;
 		EClass newRootEclass = null;
 		for(Entry<Vertex, Double> entry : bestMatchings.entrySet()){

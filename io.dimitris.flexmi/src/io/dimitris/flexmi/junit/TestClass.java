@@ -40,7 +40,7 @@ public class TestClass {
 	@Test
 	public void testCase1() {
 		
-		//Wrong tag names in two nodes
+		//Wrong tag names in two elements
 		try {
 			testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument1.xml"));
 		} catch (IOException e) {
@@ -52,7 +52,7 @@ public class TestClass {
 	@Test
 	public void testCase2() {
 		
-		//Wrong tag names and wrong attribute names in two nodes
+		//Wrong tag names and wrong attribute names in two elements
 		try {
 			testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument2.xml"));
 		} catch (IOException e) {
@@ -60,6 +60,14 @@ public class TestClass {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testCase3(){
+		//Multiple elements with the same name
+	}
+	
+	@Test
+	public void testCase4(){}
 	
 	private void testDoc(File EmfModel,File ExpectedXML,File TestDocument) throws IOException{
 		EcoreGenerator gen = new EcoreGenerator();

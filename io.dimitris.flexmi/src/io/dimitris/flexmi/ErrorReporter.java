@@ -22,7 +22,7 @@ public class ErrorReporter {
 		this.bestMatchings = bestMatchings;
 	}
 	
-	public void start(){
+	public ArrayList<String> start(){
 		ArrayList<String> errorReport = new ArrayList<String>();
 		getErrorReport(doc.getRootElement(),errorReport);
 		if(errorReport.isEmpty()){
@@ -32,6 +32,7 @@ public class ErrorReporter {
 				System.out.println(errors);
 			}
 		}
+		return errorReport;
 	}
 	
 	private void getErrorReport(Element element, ArrayList<String> errorReport){
