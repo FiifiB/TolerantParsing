@@ -101,7 +101,6 @@ public class MainFrameGUI {
 		
 		
 		cardlayout.show(contentPanel, "loadmodel");
-		loadmodelpanel.lblerrorLabel.setText(String.valueOf(panel));
 		panel = 1;
 	}
 	
@@ -118,11 +117,18 @@ public class MainFrameGUI {
 						model = loadmodelpanel.getModel();
 						cardlayout.show(contentPanel, "loadxml");
 						panel ++;
+					} catch (NullPointerException npe) {
+						JOptionPane.showConfirmDialog(loadmodelpanel
+								, "No meta-model file provided.\nPlease provide a suitable meta-model"
+								,"Blank Input"
+								,JOptionPane.OK_CANCEL_OPTION
+								,JOptionPane.INFORMATION_MESSAGE);
 					} catch (Exception e) {
 						StringWriter sw = new StringWriter();
 						e.printStackTrace(new PrintWriter(sw));
-						String exceptionAsString = sw.toString();
-						loadmodelpanel.lblerrorLabel.setText(exceptionAsString);
+						String exceptionAsString[] = sw.toString().split("\n");
+						int indexSubstring = exceptionAsString[0].indexOf("Exception");
+						loadmodelpanel.lblerrorLabel.setText(exceptionAsString[0].substring(indexSubstring+10));
 						
 					}
 				}
@@ -132,11 +138,18 @@ public class MainFrameGUI {
 						xmldocument = loadxmlpanel.getDocument();
 						cardlayout.show(contentPanel, "graphtransform");
 						panel ++;
+					} catch (NullPointerException npe) {
+						JOptionPane.showConfirmDialog(loadxmlpanel
+								, "No XML file provided.\nPlease provide a suitable XML document"
+								,"Blank Input"
+								,JOptionPane.OK_CANCEL_OPTION
+								,JOptionPane.INFORMATION_MESSAGE);
 					} catch (Exception e) {
 						StringWriter sw = new StringWriter();
 						e.printStackTrace(new PrintWriter(sw));
-						String exceptionAsString = sw.toString();
-						JOptionPane.showConfirmDialog(loadxmlpanel, exceptionAsString);						
+						String exceptionAsString[] = sw.toString().split("\n");
+						int indexSubstring = exceptionAsString[0].indexOf("Exception");
+						loadxmlpanel.setErrorText(exceptionAsString[0].substring(indexSubstring+10));					
 					}
 				}
 				else if(panel == 3){

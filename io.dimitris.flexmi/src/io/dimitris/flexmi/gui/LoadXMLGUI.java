@@ -2,6 +2,7 @@ package io.dimitris.flexmi.gui;
 
 import io.dimitris.flexmi.LoadData;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,9 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.jdom2.Document;
@@ -25,6 +28,7 @@ public class LoadXMLGUI extends JPanel {
 	private JFileChooser fc;
 	private MainFrameGUI parent;
 	private File documentFile;
+	private JLabel lblerrorLabel;
 
 	/**
 	 * Create the panel.
@@ -47,9 +51,20 @@ public class LoadXMLGUI extends JPanel {
 		btnbrowse.addActionListener(new actionlistner());
 		add(btnbrowse);
 		
-		JList list = new JList();
-		list.setBounds(13, 119, 768, 294);
-		add(list);
+//		JTextArea list = new JTextArea();
+//		list.setBounds(13, 119, 768, 294);
+//		add(list);
+//		list.setText("This is a test to see where the text is");
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Status", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
+		panel.setBounds(13, 119, 768, 294);
+		add(panel);
+		panel.setLayout(null);
+		
+		lblerrorLabel = new JLabel();
+		lblerrorLabel.setBounds(27, 51, 588, 43);
+		panel.add(lblerrorLabel);
 		
 		JLabel lblClickNextTo = new JLabel("Click Next to start tool");
 		lblClickNextTo.setBounds(12, 425, 598, 15);
@@ -63,6 +78,10 @@ public class LoadXMLGUI extends JPanel {
 		fc.addChoosableFileFilter(filter);
 		
 
+	}
+	
+	public void setErrorText (String error){
+		lblerrorLabel.setText(error);
 	}
 	
 	public Document getDocument() throws JDOMException, IOException{
