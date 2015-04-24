@@ -91,8 +91,6 @@ public class LoadModelGUI extends JPanel {
 		            textField.setText(modelFile.getAbsolutePath());
 		            //This is where a real application would open the file.
 		           
-		        } else {
-		            
 		        }
 			}
 

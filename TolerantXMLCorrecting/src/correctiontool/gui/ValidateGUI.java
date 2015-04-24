@@ -44,14 +44,14 @@ public class ValidateGUI extends JPanel {
 	public Graph startValidating(String ValidationName){
 		if(ValidationName == "Pairwise Validation"){
 			Validation pvalidation = new PairwiseValidation(parent.XMLGraph, parent.modelGraph, parent.xmldocument, parent.model);
-			boolean validationResult = pvalidation.getValidationResult();
+			Object validationResult = pvalidation.getValidationResult();
 			
-			if (validationResult == true){
+			if (validationResult == null || validationResult == ""){
 				lblValidatingStatus.setText("Validating Succes. No errors found");
 				return null;
 			}
 			
-			return (Graph)pvalidation.getValidationErrors();			
+			return (Graph)validationResult;			
 		}
 		return null;
 	}

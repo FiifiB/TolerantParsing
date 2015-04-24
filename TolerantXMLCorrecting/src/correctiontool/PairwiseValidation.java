@@ -26,24 +26,20 @@ public class PairwiseValidation extends Validation{
 	}
 
 	@Override
-	public boolean getValidationResult() {
-		boolean result = false;
+	public Object getValidationResult() {
+		Object result = null;
 		validationErrors = matchGraphs(XMLGraph, modelGraph,xmldoc,ecoremodel);
 		//TODO check graph to see if validation produces errors
 		boolean pairsmatched = doPairsmatch(validationErrors);
 		boolean equalNoOfnodes = noOfNodes(validationErrors, XMLGraph);
 		
-		if(pairsmatched && equalNoOfnodes)
-			return true;
+		if(pairsmatched && equalNoOfnodes){
+			result = null;
+			return result;
+		}
 		
-		return result;
-	}
-	
-	@Override
-	public Object getValidationErrors() {
 		return validationErrors;
-	}
-	
+	}	
 	
 	
 	private Graph matchGraphs(Graph DocGraph, Graph ModelGraph,Document doc, EPackage model){

@@ -8,8 +8,6 @@ public abstract class Validation {
 		
 	}
 	
-	public abstract boolean getValidationResult();
-	
-	public abstract Object getValidationErrors();
+	public abstract Object getValidationResult();
 
 }
