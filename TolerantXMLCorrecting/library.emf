@@ -11,10 +11,11 @@ class Book {
 	val Chapter[*] chapters;	
 }
 
-class Chapte
+class Chapter{
 	attr String name;
-	attr int pages
+	attr int pages;
 	val Content[1] content;
+}
 
 class Content{
 	

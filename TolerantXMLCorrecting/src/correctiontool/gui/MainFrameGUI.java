@@ -130,6 +130,11 @@ public class MainFrameGUI {
 						String exceptionAsString[] = sw.toString().split("\n");
 						int indexSubstring = exceptionAsString[0].indexOf("Exception");
 						loadmodelpanel.setErrorText(exceptionAsString[0].substring(indexSubstring+10));
+						JOptionPane.showConfirmDialog(loadmodelpanel
+								, "An error occured with the meta-model.\nLook at panel for details"
+								,"Meta-Model Error"
+								,JOptionPane.OK_CANCEL_OPTION
+								,JOptionPane.INFORMATION_MESSAGE);
 						
 					}
 				}
@@ -151,7 +156,12 @@ public class MainFrameGUI {
 						e.printStackTrace(new PrintWriter(sw));
 						String exceptionAsString[] = sw.toString().split("\n");
 						int indexSubstring = exceptionAsString[0].indexOf("Exception");
-						loadxmlpanel.setErrorText(exceptionAsString[0].substring(indexSubstring+10));					
+						loadxmlpanel.setErrorText(exceptionAsString[0].substring(indexSubstring+10));
+						JOptionPane.showConfirmDialog(loadxmlpanel
+								, "An error occured with the XML document.\nLook at panel for details"
+								,"XML Error"
+								,JOptionPane.OK_CANCEL_OPTION
+								,JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				else if(panel == 3){
