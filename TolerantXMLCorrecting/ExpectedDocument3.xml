@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Library name="JB Morrell">
+	<Book name="Great Expectations">
+		<Chapter name="Chapter 1" pages="20">
+			<Content>Once Upon a time, there lived a....</Content>
+		</Chapter>
+	</Book>
+</Library>

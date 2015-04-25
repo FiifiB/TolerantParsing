@@ -46,19 +46,53 @@ public class TestClass {
 	@Test
 	public void testCase2() throws Exception {
 		
-		//Wrong tag names and wrong attribute names in two elements
+		//Wrong tag names and wrong attribute names in multiple elements
 		testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument2.xml"));
 	}
 	
 	
 	
 	@Test
-	public void testCase3(){
+	public void testCase3() throws Exception{
 		//Multiple elements with the same name
+		testDoc(new File("library.emf"), new File("ExpectedDocument2.xml"), new File("TestDocument3.xml"));
 	}
 	
 	@Test
-	public void testCase4(){}
+	public void testCase4() throws Exception{
+		//Wrong tag name in one element
+		testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument4.xml"));
+	}
+	
+	@Test
+	public void testCase5() throws Exception{
+		//Wrong attribute name in one element
+		testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument5.xml"));
+	}
+	
+	@Test
+	public void testCase6() throws Exception{
+		//Testing with elements without attributes and single letter tag names
+		//where one element has a wrong tag name
+		testDoc(new File("ABC.emf"), new File("ExpectedDocument4.xml"), new File("TestDocument6.xml"));
+	}
+	
+	@Test
+	public void testCase7() throws Exception{
+		//Testing with elements without attributes and single letter tag names
+		//where two element has a wrong tag name
+		testDoc(new File("ABC.emf"), new File("ExpectedDocument4.xml"), new File("TestDocument7.xml"));
+	}
+	
+	@Test
+	public void testCase8(){
+		//Wrong tag name in multiple elements with different meta-model
+	}
+	
+	@Test
+	public void testCase9(){
+		//Wrong tag name in multiple elements with different meta-model
+	}
 	
 	private void testDoc(File EmfModel,File ExpectedXML,File TestDocument) throws Exception{
 		
