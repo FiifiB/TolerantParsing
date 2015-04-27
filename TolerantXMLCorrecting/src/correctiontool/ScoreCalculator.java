@@ -113,20 +113,15 @@ public class ScoreCalculator {
 			for(Attribute att: element.getAttributes()){
 				attSum = attSum + LevenshteinDistance.distance(att.getName(), attDistance.bestMatch(att.getName()));
 			}
-//			System.out.println("sum dist: " + attSum);
-			attSum = attSum / numberOfatts;
+			
 			sum = sum + attSum;
-		}else if(eclass.getEAllAttributes() == null){
-			System.out.println("null eclass so adds to sum");
-			sum = sum + element.getAttributes().size();
 		}
 		
 		int numberOfChildrenXML = DocGraph.getNode(element).getConnectedEdges().size();
 		int numberOfChildrenModel = ModelGraph.getNode(eclass).getConnectedEdges().size();
 		//get difference between number of children in graph and model
 		int absdifference = Math.abs(numberOfChildrenXML - numberOfChildrenModel);
-		int absdifferenceofatts = Math.abs(numberOfattsElements - numberOfatts);
-		sum = sum + absdifference + absdifferenceofatts;
+		sum = sum + absdifference;
 		return sum;
 	}
 	

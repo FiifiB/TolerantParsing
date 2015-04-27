@@ -21,5 +21,10 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="content" lowerBound="1" eType="//Content" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Content"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Content">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="text" upperBound="-1" eType="//Text" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="images" upperBound="-1" eType="//Image" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Text"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Image"/>
 </ecore:EPackage>

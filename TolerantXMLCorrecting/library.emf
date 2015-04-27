@@ -18,5 +18,13 @@ class Chapter{
 }
 
 class Content{
+	val Text[*] text;
+	val Image[*] images;
+}
+
+class Text{
+	
+}
+class Image{
 	
 }

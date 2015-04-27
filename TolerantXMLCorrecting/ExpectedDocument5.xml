@@ -1,0 +1,4 @@
+<Net>
+	<Transition name ="Train"></Transition>
+	<Place name ="London"></Place>
+</Net>

@@ -33,10 +33,6 @@ public class CorrectionGUI extends JPanel {
 		setLayout(null);
 		this.parent = parent;
 		
-		JLabel lblCorrectionStatus = new JLabel("...Validating");
-		lblCorrectionStatus.setBounds(12, 112, 281, 30);
-		add(lblCorrectionStatus);
-		
 		JLabel lblChooseOutputMethod = new JLabel("Please Choose how you want the corrections to be applied");
 		lblChooseOutputMethod.setBounds(12, 162, 458, 30);
 		add(lblChooseOutputMethod);

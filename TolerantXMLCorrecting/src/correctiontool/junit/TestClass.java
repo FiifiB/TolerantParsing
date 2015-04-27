@@ -47,7 +47,7 @@ public class TestClass {
 	public void testCase2() throws Exception {
 		
 		//Wrong tag names and wrong attribute names in multiple elements
-		testDoc(new File("library.emf"), new File("ExpectedDocument1.xml"), new File("TestDocument2.xml"));
+		testDoc(new File("library.emf"), new File("ExpectedDocument3.xml"), new File("TestDocument2.xml"));
 	}
 	
 	
@@ -85,13 +85,34 @@ public class TestClass {
 	}
 	
 	@Test
-	public void testCase8(){
-		//Wrong tag name in multiple elements with different meta-model
+	public void testCase8() throws Exception{
+		//Wrong tag name in multiple elements with different meta-model more complex 
+		testDoc(new File("Petrinet.emf"), new File("ExpectedDocument5.xml"), new File("TestDocument8.xml"));
 	}
 	
 	@Test
-	public void testCase9(){
-		//Wrong tag name in multiple elements with different meta-model
+	public void testCase9() throws Exception{
+		//Wrong tag name and attributes in multiple elements with different meta-model
+		testDoc(new File("Petrinet.emf"), new File("ExpectedDocument5.xml"), new File("TestDocument9.xml"));
+	}
+	
+	@Test
+	public void testCase10() throws Exception{
+		//Testing with elements without attributes and single letter tag names
+		//where multiple elements have wrong tag names and the error is extensive
+		testDoc(new File("ABC.emf"), new File("ExpectedDocument6.xml"), new File("TestDocument10.xml"));
+	}
+	
+	@Test
+	public void testCase11() throws Exception{
+		//Multiple elements with tag name errors with an XML document with depth greater than 3
+		testDoc(new File("library.emf"), new File("ExpectedDocument7.xml"), new File("TestDocument11.xml"));
+	}
+	
+	@Test
+	public void testCase12() throws Exception{
+		//Wrong tag name in one element with different meta-model more complex 
+		testDoc(new File("Petrinet.emf"), new File("ExpectedDocument5.xml"), new File("TestDocument12.xml"));
 	}
 	
 	private void testDoc(File EmfModel,File ExpectedXML,File TestDocument) throws Exception{

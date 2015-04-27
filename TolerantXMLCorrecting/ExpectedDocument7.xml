@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Library name="JB Morrell">
+	<Book name="Great Expectations">
+		<Chapter name="Chapter 1" pages="20">
+			<Content>
+				<Image></Image>
+				<Text></Text>
+			</Content>
+		</Chapter>
+	</Book>
+	<Book name="The lion the witch and wardrobe">
+		<Chapter name="Chapter 1" pages="25">
+			<Content>
+				<Image></Image>
+				<Text></Text>
+			</Content>
+		</Chapter>
+	</Book>
+</Library>

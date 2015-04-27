@@ -28,12 +28,12 @@ public class ValidateGUI extends JPanel {
 		add(lblValidatingStatus);
 		
 		JLabel lblChooseCorrectionalMethod = new JLabel("Please Choose Correctional method");
-		lblChooseCorrectionalMethod.setBounds(12, 162, 281, 30);
+		lblChooseCorrectionalMethod.setBounds(12, 12, 281, 30);
 		add(lblChooseCorrectionalMethod);
 		
 		String CorrectionalMethod[] = {"Simularity Flooding"};
 		comboBox = new JComboBox(CorrectionalMethod);
-		comboBox.setBounds(12, 194, 497, 30);
+		comboBox.setBounds(12, 54, 497, 30);
 		add(comboBox);
 		
 		JLabel lblClickNextTo = new JLabel("Click Next to start Correction process");
